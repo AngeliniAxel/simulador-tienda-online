@@ -1,1 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,300;0,400;0,600;0,700;0,900;1,100;1,300;1,400;1,600;1,700&display=swap');
+
 @import url(reset.css);
+
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+h2,
+h3 {
+    font-family: 'Poppins', sans-serif;
+}
+
+main {
+    display: flex;
+    gap: 10px;
+    margin: 0 auto;
+    max-width: 900px;
+    flex-wrap: wrap;
+}
+
+.product-container {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    > * {
+        margin-top: 10px;
+    }
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-title {
+        font-weight: 600;
+        font-size: 18px;
+        color: #666;
+    }
+
+    .product-description {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .product-img {
+        width: 230px;
+        margin: 0 auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        img {
+            border-radius: 8px;
+        }
+    }
+
+    .add-to-cart-button {
+        background-color: #ff6f61;
+        color: #ffffff;
+        border: none;
+        width: 100%;
+        border-radius: 5px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #e65c50;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        }
+    }
+}
