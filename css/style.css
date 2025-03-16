@@ -1,14 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,300;0,400;0,600;0,700;0,900;1,100;1,300;1,400;1,600;1,700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
 
 @import url(reset.css);
+@import url(variables.css);
 
-* {
-    font-family: 'Lato', sans-serif;
+body {
+    font-family: var(--primary-font);
+    color: var(--text-grey);
 }
 
 h2,
 h3 {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--secondary-font);
+}
+
+nav {
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+        max-width: 40px;
+    }
 }
 
 .products-container {
@@ -24,7 +37,7 @@ h3 {
     flex-direction: column;
     width: 250px;
     padding: 10px;
-    background-color: #f4f4f4;
+    background-color: var(--background-grey);
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -43,13 +56,13 @@ h3 {
     .product-title {
         font-weight: 600;
         font-size: 18px;
-        color: #666;
+        color: var(--text-grey);
     }
 
     .product-description,
     .product-price {
         font-size: 14px;
-        color: #666;
+        color: var(--text-grey);
     }
 
     .product-img {
@@ -63,8 +76,8 @@ h3 {
     }
 
     .add-to-cart-button {
-        background-color: #ff6f61;
-        color: #ffffff;
+        background-color: var(--red);
+        color: var(--text-white);
         border: none;
         width: 100%;
         border-radius: 5px;
