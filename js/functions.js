@@ -46,3 +46,15 @@ const renderByBrand = (e) => {
         renderAllProducts(filteredProducts);
     }
 };
+
+const filterByName = (name) => {
+    const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(name.toLowerCase())
+    );
+    return filteredProducts;
+};
+
+const renderByName = (e) => {
+    let filteredProducts = filterByName(e.target.value);
+    renderAllProducts(filteredProducts);
+};
