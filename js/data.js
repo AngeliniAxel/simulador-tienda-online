@@ -37,7 +37,7 @@ const products = [
     },
     {
         id: 5,
-        name: 'Head Speed Pro Legend',
+        name: 'Head Speed Legend',
         brand: 'head',
         image: '../assets/images/speed_pro_legend.jpg',
         description: 'Usada por profesionales por su velocidad y precisión.',

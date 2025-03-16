@@ -68,6 +68,54 @@ const addToCart = (cart, id) => {
     } else {
         cart.push({ id: id, quantity: 1 });
     }
-
-    console.log(cart);
+    printCart(cart);
 };
+
+const printCart = (cart) => {
+    const cartItems = document.querySelector('.cart-items');
+    cartItems.innerHTML = '';
+
+    let total = 0;
+
+    for (const item of cart) {
+        const productFound = products.find((product) => product.id == item.id);
+
+        const itemContainer = document.createElement('div');
+        itemContainer.classList.add('item-cart-container');
+
+        const itemDetail = document.createElement('p');
+        itemDetail.textContent = `${productFound.name} - 
+        €${productFound.price} x ${item.quantity}`;
+
+        const btnsContainer = document.createElement('div');
+        btnsContainer.classList.add('btns-container');
+
+        const eliminarBtn = document.createElement('button');
+        eliminarBtn.textContent = 'Eliminar';
+
+        const restBtn = document.createElement('button');
+        restBtn.textContent = '-';
+
+        const addBtn = document.createElement('button');
+        addBtn.textContent = '+';
+
+        btnsContainer.append(eliminarBtn, restBtn, addBtn);
+
+        itemContainer.append(itemDetail, btnsContainer);
+        cartItems.appendChild(itemContainer);
+
+        total += Number(productFound.price) * Number(item.quantity);
+    }
+
+    const totalAmount = document.querySelector('.cart-total');
+    totalAmount.textContent = `Total: €${total}`;
+};
+
+{
+    /* <div class='cart-container'>
+    <h3 class='cart-title'>Carrito de compras</h3>
+    <p class='cart-total'>Total: €0</p>
+    <button>Vaciar carrito</button>
+    <button>Proceder a comprar</button>
+</div>; */
+}
