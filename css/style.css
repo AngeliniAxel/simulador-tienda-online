@@ -3,6 +3,8 @@
 @import url(reset.css);
 @import url(variables.css);
 
+/* General Layour */
+
 body {
     font-family: var(--primary-font);
     color: var(--text-grey);
@@ -12,6 +14,20 @@ h2,
 h3 {
     font-family: var(--secondary-font);
 }
+
+button {
+    border: none;
+}
+
+.hidden {
+    display: hidden;
+    opacity: 0;
+    transition: 1s;
+}
+
+/* End general Layour */
+
+/* Nav */
 
 nav {
     max-width: 1200px;
@@ -36,7 +52,48 @@ nav {
     select {
         border: none;
     }
+
+    .cart-icon {
+        cursor: pointer;
+
+        &:hover {
+            color: var(--text-grey);
+        }
+    }
 }
+
+/* End nav */
+
+/* Cart */
+
+.cart-container {
+    position: absolute;
+    width: 200px;
+    padding: 10px;
+    left: 1em;
+    border: 1px solid var(--red);
+    background-color: var(--background-grey);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    z-index: 99;
+    transition: 0.3s;
+
+    button {
+        background-color: var(--red);
+        color: var(--text-white);
+        width: 100%;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #e65c50;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        }
+    }
+}
+
+/* End cart */
+
+/* Products Section */
 
 .products-container {
     display: flex;
@@ -92,7 +149,6 @@ nav {
     .add-to-cart-button {
         background-color: var(--red);
         color: var(--text-white);
-        border: none;
         width: 100%;
         border-radius: 5px;
 
@@ -103,3 +159,5 @@ nav {
         }
     }
 }
+
+/* End products Section */
