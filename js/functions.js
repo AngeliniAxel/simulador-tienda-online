@@ -24,6 +24,7 @@ const renderProduct = (product) => {
     pDescription.textContent = product.description;
     pPrice.textContent = product.price;
     addToCartBtn.textContent = 'Agregar al Carrito';
+    addToCartBtn.id = product.id;
 
     productCard.append(imgContainer, h3Title, pDescription, pPrice, addToCartBtn);
     return productCard;
@@ -57,4 +58,16 @@ const filterByName = (name) => {
 const renderByName = (e) => {
     let filteredProducts = filterByName(e.target.value);
     renderAllProducts(filteredProducts);
+};
+
+const addToCart = (cart, id) => {
+    let itemIndex = cart.findIndex((item) => item.id === id);
+
+    if (itemIndex !== -1) {
+        cart[itemIndex].quantity++;
+    } else {
+        cart.push({ id: id, quantity: 1 });
+    }
+
+    console.log(cart);
 };

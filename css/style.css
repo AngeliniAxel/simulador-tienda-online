@@ -5,7 +5,8 @@
 
 /* General Layour */
 
-body {
+body,
+button {
     font-family: var(--primary-font);
     color: var(--text-grey);
 }
@@ -55,6 +56,8 @@ nav {
 
     .cart-icon {
         cursor: pointer;
+        color: var(--text-white);
+        background-color: transparent;
 
         &:hover {
             color: var(--text-grey);
@@ -78,10 +81,19 @@ nav {
     z-index: 99;
     transition: 0.3s;
 
+    > * {
+        margin: 0.2em;
+    }
+
+    .cart-title {
+        font-weight: 600;
+    }
+
     button {
         background-color: var(--red);
         color: var(--text-white);
         width: 100%;
+        border-radius: 5px;
 
         &:hover {
             cursor: pointer;
