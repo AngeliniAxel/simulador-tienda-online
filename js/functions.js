@@ -1,0 +1,39 @@
+const renderProduct = (product) => {
+    const productCard = document.createElement('div');
+    const imgContainer = document.createElement('figure');
+    const img = document.createElement('img');
+    const h3Title = document.createElement('h3');
+    const pDescription = document.createElement('p');
+    const pPrice = document.createElement('p');
+    const addToCartBtn = document.createElement('button');
+
+    productCard.classList.add('product-card');
+    imgContainer.classList.add('product-img');
+    h3Title.classList.add('product-title');
+    pDescription.classList.add('product-description');
+    pPrice.classList.add('product-price');
+    addToCartBtn.classList.add('add-to-cart-button');
+
+    productCard.id = product.id;
+
+    imgContainer.appendChild(img);
+    img.src = product.image;
+    img.alt = product.name;
+
+    h3Title.textContent = product.name;
+    pDescription.textContent = product.description;
+    pPrice.textContent = product.price;
+    addToCartBtn.textContent = 'Agregar al Carrito';
+
+    productCard.append(imgContainer, h3Title, pDescription, pPrice, addToCartBtn);
+    return productCard;
+};
+
+const renderAllProducts = (products) => {
+    const productsSection = document.querySelector('.products-container');
+    productsSection.innerHTML = '';
+
+    products.forEach((product) => {
+        productsSection.appendChild(renderProduct(product));
+    });
+};

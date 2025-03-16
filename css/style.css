@@ -11,7 +11,7 @@ h3 {
     font-family: 'Poppins', sans-serif;
 }
 
-main {
+.products-container {
     display: flex;
     gap: 10px;
     margin: 0 auto;
@@ -19,13 +19,14 @@ main {
     flex-wrap: wrap;
 }
 
-.product-container {
+.product-card {
     display: flex;
     flex-direction: column;
     width: 250px;
     padding: 10px;
     background-color: #f4f4f4;
     align-items: center;
+    justify-content: space-between;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -45,7 +46,8 @@ main {
         color: #666;
     }
 
-    .product-description {
+    .product-description,
+    .product-price {
         font-size: 14px;
         color: #666;
     }

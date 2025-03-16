@@ -2,7 +2,7 @@ const products = [
     {
         id: 1,
         name: 'Head Radical Pro',
-        image: 'img/radical_pro.jpg',
+        image: '../assets/images/radical_pro.jpg',
         description: 'Ideal para jugadores avanzados que buscan equilibrio.',
         price: 320,
         stock: 5,
@@ -10,7 +10,7 @@ const products = [
     {
         id: 2,
         name: 'Head Radical MP',
-        image: 'img/radical_mp.jpg',
+        image: '../assets/images/radical_mp.jpg',
         description: 'Diseñada para jugadores que necesitan control y potencia.',
         price: 280,
         stock: 6,
@@ -18,7 +18,7 @@ const products = [
     {
         id: 3,
         name: 'Head Gravity Pro',
-        image: 'img/gravity_pro.jpg',
+        image: '../assets/images/gravity_pro.jpg',
         description: 'Perfecta para estabilidad y golpes precisos.',
         price: 350,
         stock: 3,
@@ -26,7 +26,7 @@ const products = [
     {
         id: 4,
         name: 'Head Gravity Tour',
-        image: 'img/gravity_tour.jpg',
+        image: '../assets/images/gravity_tour.jpg',
         description: 'Muy popular entre jugadores de nivel intermedio.',
         price: 300,
         stock: 7,
@@ -34,7 +34,7 @@ const products = [
     {
         id: 5,
         name: 'Head Speed Pro Legend',
-        image: 'img/speed_pro_legend.jpg',
+        image: '../assets/images/speed_pro_legend.jpg',
         description: 'Usada por profesionales por su velocidad y precisión.',
         price: 340,
         stock: 4,
@@ -42,7 +42,7 @@ const products = [
     {
         id: 6,
         name: 'Head Speed Pro',
-        image: 'img/speed_pro.jpg',
+        image: '../assets/images/speed_pro.jpg',
         description: 'Gran opción para quienes buscan control y velocidad.',
         price: 310,
         stock: 5,
@@ -50,7 +50,7 @@ const products = [
     {
         id: 7,
         name: 'Head Speed MP',
-        image: 'img/speed_mp.jpg',
+        image: '../assets/images/speed_mp.jpg',
         description: 'Equilibrio perfecto entre potencia y control.',
         price: 290,
         stock: 6,
@@ -58,7 +58,7 @@ const products = [
     {
         id: 8,
         name: 'Wilson Blade 98',
-        image: 'img/blade_98.jpg',
+        image: '../assets/images/blade_98.jpg',
         description: 'Popular por su gran sensación y estabilidad.',
         price: 330,
         stock: 4,
@@ -66,7 +66,7 @@ const products = [
     {
         id: 9,
         name: 'Wilson Shift 99',
-        image: 'img/shift_99.jpg',
+        image: '../assets/images/shift_99.jpg',
         description: 'Perfecta para golpes precisos y rápidos.',
         price: 270,
         stock: 7,
@@ -74,7 +74,7 @@ const products = [
     {
         id: 10,
         name: 'Wilson Clash 100',
-        image: 'img/clash_100.jpg',
+        image: '../assets/images/clash_100.jpg',
         description: 'Conocida por su comodidad y flexibilidad.',
         price: 260,
         stock: 8,
@@ -82,7 +82,7 @@ const products = [
     {
         id: 11,
         name: 'Wilson Pro Staff 97',
-        image: 'img/pro_staff_97.jpg',
+        image: '../assets/images/pro_staff_97.jpg',
         description: 'Favorita entre jugadores que buscan precisión.',
         price: 320,
         stock: 2,
