@@ -69,6 +69,9 @@ const addToCart = (cart, id) => {
         cart.push({ id: id, quantity: 1 });
     }
     printCart(cart);
+
+    const cartContainer = document.querySelector('.cart-container');
+    if (cartContainer.classList.contains('hidden')) cartContainer.classList.remove('hidden');
 };
 
 const printCart = (cart) => {
@@ -110,12 +113,3 @@ const printCart = (cart) => {
     const totalAmount = document.querySelector('.cart-total');
     totalAmount.textContent = `Total: €${total}`;
 };
-
-{
-    /* <div class='cart-container'>
-    <h3 class='cart-title'>Carrito de compras</h3>
-    <p class='cart-total'>Total: €0</p>
-    <button>Vaciar carrito</button>
-    <button>Proceder a comprar</button>
-</div>; */
-}
