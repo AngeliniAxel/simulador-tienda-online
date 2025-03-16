@@ -18,9 +18,23 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: var(--red);
+    color: var(--text-white);
+    padding: 5px;
+    margin-bottom: 10px;
 
     .logo {
-        max-width: 40px;
+        max-width: 30px;
+    }
+
+    .search-bar {
+        width: 100px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    select {
+        border: none;
     }
 }
 
