@@ -37,3 +37,12 @@ const renderAllProducts = (products) => {
         productsSection.appendChild(renderProduct(product));
     });
 };
+
+const renderByBrand = (e) => {
+    if (e.target.value === 'all') {
+        renderAllProducts(products);
+    } else {
+        let filteredProducts = products.filter((product) => product.brand === e.target.value);
+        renderAllProducts(filteredProducts);
+    }
+};
