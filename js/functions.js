@@ -51,6 +51,19 @@ const renderByBrand = (e) => {
     }
 };
 
+const selectFilter = (e) => {
+    const valueName = inputName.value;
+    const value = e.target.value;
+    const nameInput = e.target.name;
+
+    if (nameInput === 'brand') brand = value;
+
+    let filteredProducts = products
+        .filter((item) => item.name.toLowerCase().includes(valueName.toLowerCase()))
+        .filter((item) => brand === 'all' || item.brand === brand);
+    renderAllProducts(filteredProducts);
+};
+
 const filterByName = (name) => {
     const filteredProducts = products.filter((product) =>
         product.name.toLowerCase().includes(name.toLowerCase())
