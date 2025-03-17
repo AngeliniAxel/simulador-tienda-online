@@ -1,32 +1,39 @@
-const renderProduct = (product) => {
-    const productCard = document.createElement('div');
-    const imgContainer = document.createElement('figure');
+const createElement = (tag, className = '', textContent = '') => {
+    const htmlElement = document.createElement(tag);
+    if (className) htmlElement.classList.add(className);
+    if (textContent) htmlElement.textContent = textContent;
+    return htmlElement;
+};
+
+const createImg = (src = '', alt = '', className = '') => {
     const img = document.createElement('img');
-    const h3Title = document.createElement('h3');
-    const pDescription = document.createElement('p');
-    const pPrice = document.createElement('p');
-    const addToCartBtn = document.createElement('button');
 
-    productCard.classList.add('product-card');
-    imgContainer.classList.add('product-img');
-    h3Title.classList.add('product-title');
-    pDescription.classList.add('product-description');
-    pPrice.classList.add('product-price');
-    addToCartBtn.classList.add('add-to-cart-button');
+    if (src) img.src = src;
+    if (alt) img.alt = alt;
+    if (className) img.classList.add(className);
 
+    return img;
+};
+
+const renderProduct = (product) => {
+    const productCard = createElement('div', 'product-card');
     productCard.id = product.id;
 
-    imgContainer.appendChild(img);
-    img.src = product.image;
-    img.alt = product.name;
+    const imgContainer = createElement('figure', 'product-img');
 
-    h3Title.textContent = product.name;
-    pDescription.textContent = product.description;
-    pPrice.textContent = product.price;
-    addToCartBtn.textContent = 'Agregar al Carrito';
+    const img = createImg(product.image, product.name);
+    imgContainer.appendChild(img);
+
+    const h3Title = createElement('h3', 'product-title', product.name);
+
+    const pDescription = createElement('p', 'product-description', product.description);
+
+    const pPrice = createElement('p', 'product-price', `€${product.price}`);
+
+    const addToCartBtn = createElement('button', 'add-to-cart-button', 'Agregar al Carrito');
     addToCartBtn.id = product.id;
     addToCartBtn.addEventListener('click', (e) => {
-        addToCart(cart, e.target.id);
+        addToCart(cart, product.id);
     });
 
     productCard.append(imgContainer, h3Title, pDescription, pPrice, addToCartBtn);
@@ -93,24 +100,21 @@ const printCart = (cart) => {
     for (const item of cart) {
         const productFound = products.find((product) => product.id == item.id);
 
-        const itemContainer = document.createElement('div');
-        itemContainer.classList.add('item-cart-container');
+        const itemContainer = createElement('div', 'item-cart-container');
 
-        const itemDetail = document.createElement('p');
-        itemDetail.textContent = `${productFound.name} - 
-        €${productFound.price} x ${item.quantity}`;
+        const itemDetail = createElement(
+            'p',
+            '',
+            `${productFound.name} - €${productFound.price} x ${item.quantity}`
+        );
 
-        const btnsContainer = document.createElement('div');
-        btnsContainer.classList.add('btns-container');
+        const btnsContainer = createElement('div', 'btns-container');
 
-        const eliminarBtn = document.createElement('button');
-        eliminarBtn.textContent = 'Eliminar';
+        const eliminarBtn = createElement('button', '', 'Eliminar');
 
-        const restBtn = document.createElement('button');
-        restBtn.textContent = '-';
+        const restBtn = createElement('button', '', '-');
 
-        const addBtn = document.createElement('button');
-        addBtn.textContent = '+';
+        const addBtn = createElement('button', '', '+');
 
         btnsContainer.append(eliminarBtn, restBtn, addBtn);
 
