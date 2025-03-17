@@ -25,6 +25,9 @@ const renderProduct = (product) => {
     pPrice.textContent = product.price;
     addToCartBtn.textContent = 'Agregar al Carrito';
     addToCartBtn.id = product.id;
+    addToCartBtn.addEventListener('click', (e) => {
+        addToCart(cart, e.target.id);
+    });
 
     productCard.append(imgContainer, h3Title, pDescription, pPrice, addToCartBtn);
     return productCard;
@@ -112,4 +115,9 @@ const printCart = (cart) => {
 
     const totalAmount = document.querySelector('.cart-total');
     totalAmount.textContent = `Total: €${total}`;
+};
+
+const toggleDisplay = (itemName) => {
+    const item = document.querySelector(itemName);
+    item.classList.toggle('hidden');
 };
