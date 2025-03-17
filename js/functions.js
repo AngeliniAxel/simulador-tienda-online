@@ -42,37 +42,31 @@ const renderAllProducts = (products) => {
     });
 };
 
-const renderByBrand = (e) => {
-    if (e.target.value === 'all') {
-        renderAllProducts(products);
-    } else {
-        let filteredProducts = products.filter((product) => product.brand === e.target.value);
-        renderAllProducts(filteredProducts);
-    }
-};
-
+/**
+ * Filters products based on the input name and selected brand.
+ *
+ * It uses a global variable brand so if the event comes from the input,
+ * it still respect the brand
+ *
+ * @param {Event} e - The event object triggered by the input or select change.
+ */
 const selectFilter = (e) => {
+    // Get the current value from the input field (search bar)
     const valueName = inputName.value;
+
+    // Get the value and name of the input that triggered the event
     const value = e.target.value;
     const nameInput = e.target.name;
 
+    // If the event comes from the brand select, update the brand filter
     if (nameInput === 'brand') brand = value;
 
+    // Filter by both name and brad
     let filteredProducts = products
         .filter((item) => item.name.toLowerCase().includes(valueName.toLowerCase()))
         .filter((item) => brand === 'all' || item.brand === brand);
-    renderAllProducts(filteredProducts);
-};
 
-const filterByName = (name) => {
-    const filteredProducts = products.filter((product) =>
-        product.name.toLowerCase().includes(name.toLowerCase())
-    );
-    return filteredProducts;
-};
-
-const renderByName = (e) => {
-    let filteredProducts = filterByName(e.target.value);
+    // Render resulted array
     renderAllProducts(filteredProducts);
 };
 
