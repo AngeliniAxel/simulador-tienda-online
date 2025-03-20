@@ -108,7 +108,6 @@ const emptyCart = (cart) => {
         denyButtonText: `Cancelar`,
         denyButtonColor: '#666',
     }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
             Swal.fire({
                 title: 'Carrito eliminado!',
@@ -117,10 +116,33 @@ const emptyCart = (cart) => {
             });
             cart.splice(0, cart.length);
             printCart(cart);
-        } else if (result.isDenied) {
-            /* Swal.fire("Changes are not saved", "", "info"); */
         }
     });
+};
+
+const buyCart = (cart) => {
+    if (!cart.length) {
+        Swal.fire({
+            icon: 'error',
+            title: 'El carrito esta vacio!!',
+            text: 'Agrega productos antes de comprar!',
+            confirmButtonColor: '#ff6f61',
+        });
+    } else {
+        const total = cart.reduce((sum, item) => {
+            const product = products.find((p) => p.id === item.id);
+            return sum + product.price * item.quantity;
+        }, 0);
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Gracias por su compra!!!',
+            text: `Total a pagar: €${total}`,
+            confirmButtonColor: '#ff6f61',
+        });
+        cart.splice(0, cart.length);
+        printCart(cart);
+    }
 };
 
 const printCart = (cart) => {

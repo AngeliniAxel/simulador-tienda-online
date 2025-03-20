@@ -14,3 +14,6 @@ cartBtn.addEventListener('click', () => toggleDisplay('.cart-container'));
 
 const emptyCartButton = document.querySelector('.empty-btn');
 emptyCartButton.addEventListener('click', () => emptyCart(cart));
+
+const buyCartButton = document.querySelector('.buy-btn');
+buyCartButton.addEventListener('click', () => buyCart(cart));
