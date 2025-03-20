@@ -1,7 +1,9 @@
-const createElement = (tag, className = '', textContent = '') => {
+const createElement = (tag, className = '', textContent = '', functionEvent = null, id = null) => {
     const htmlElement = document.createElement(tag);
     if (className) htmlElement.classList.add(className);
     if (textContent) htmlElement.textContent = textContent;
+    if (functionEvent && tag == 'button') htmlElement.addEventListener('click', functionEvent);
+    if (id) htmlElement.id = id;
     return htmlElement;
 };
 
@@ -30,11 +32,17 @@ const renderProduct = (product) => {
 
     const pPrice = createElement('p', 'product-price', `€${product.price}`);
 
-    const addToCartBtn = createElement('button', 'add-to-cart-button', 'Agregar al Carrito');
-    addToCartBtn.id = product.id;
+    const addToCartBtn = createElement(
+        'button',
+        'add-to-cart-button',
+        'Agregar al Carrito',
+        () => addToCart(cart, product.id),
+        product.id
+    );
+    /* addToCartBtn.id = product.id;
     addToCartBtn.addEventListener('click', (e) => {
         addToCart(cart, product.id);
-    });
+    }); */
 
     productCard.append(imgContainer, h3Title, pDescription, pPrice, addToCartBtn);
     return productCard;
@@ -95,37 +103,36 @@ const printCart = (cart) => {
     const cartItems = document.querySelector('.cart-items');
     cartItems.innerHTML = '';
 
-    let total = 0;
-
-    for (const item of cart) {
-        const productFound = products.find((product) => product.id == item.id);
-
-        const itemContainer = createElement('div', 'item-cart-container');
-
-        const itemDetail = createElement(
-            'p',
-            '',
-            `${productFound.name} - €${productFound.price} x ${item.quantity}`
-        );
-
-        const btnsContainer = createElement('div', 'btns-container');
-
-        const eliminarBtn = createElement('button', '', 'Eliminar');
-
-        const restBtn = createElement('button', '', '-');
-
-        const addBtn = createElement('button', '', '+');
-
-        btnsContainer.append(eliminarBtn, restBtn, addBtn);
-
-        itemContainer.append(itemDetail, btnsContainer);
+    let total = cart.reduce((sum, item) => {
+        const { itemContainer, total } = createCartItem(item);
         cartItems.appendChild(itemContainer);
-
-        total += Number(productFound.price) * Number(item.quantity);
-    }
+        return sum + total;
+    }, 0);
 
     const totalAmount = document.querySelector('.cart-total');
     totalAmount.textContent = `Total: €${total}`;
+};
+
+const createCartItem = (item) => {
+    const productFound = products.find((product) => product.id == item.id);
+
+    const itemContainer = createElement('div', 'item-cart-container');
+    const itemDetail = createElement(
+        'p',
+        '',
+        `${productFound.name} - €${productFound.price} x ${item.quantity}`
+    );
+
+    const btnsContainer = createElement('div', 'btns-container');
+
+    const eliminarBtn = createElement('button', '', 'Eliminar');
+    const restBtn = createElement('button', '', '-');
+    const addBtn = createElement('button', '', '+');
+
+    btnsContainer.append(eliminarBtn, restBtn, addBtn);
+    itemContainer.append(itemDetail, btnsContainer);
+
+    return { itemContainer, total: Number(productFound.price) * Number(item.quantity) };
 };
 
 const toggleDisplay = (itemName) => {
