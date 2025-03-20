@@ -99,6 +99,30 @@ const addToCart = (cart, id) => {
     if (cartContainer.classList.contains('hidden')) cartContainer.classList.remove('hidden');
 };
 
+const emptyCart = (cart) => {
+    Swal.fire({
+        title: 'Seguro que quieres eliminar todo el carrito?',
+        showDenyButton: true,
+        confirmButtonText: 'Eliminar',
+        confirmButtonColor: '#ff6f61',
+        denyButtonText: `Cancelar`,
+        denyButtonColor: '#666',
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Carrito eliminado!',
+                icon: 'success',
+                confirmButtonColor: '#ff6f61',
+            });
+            cart.splice(0, cart.length);
+            printCart(cart);
+        } else if (result.isDenied) {
+            /* Swal.fire("Changes are not saved", "", "info"); */
+        }
+    });
+};
+
 const printCart = (cart) => {
     const cartItems = document.querySelector('.cart-items');
     cartItems.innerHTML = '';
