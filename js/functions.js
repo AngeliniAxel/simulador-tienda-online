@@ -40,11 +40,13 @@ const renderProduct = (product) => {
         product.id
     );
 
-    if (!product.stock) {
+    checkStock(addToCartBtn, 'Sin stock', product.stock);
+
+    /* if (!product.stock) {
         addToCartBtn.textContent = 'Sin stock';
         addToCartBtn.disabled = true;
         addToCartBtn.classList.add('no-stock');
-    }
+    } */
     /* addToCartBtn.id = product.id;
     addToCartBtn.addEventListener('click', (e) => {
         addToCart(cart, product.id);
@@ -61,6 +63,14 @@ const renderAllProducts = (products) => {
     products.forEach((product) => {
         productsSection.appendChild(renderProduct(product));
     });
+};
+
+const checkStock = (btn, textContent = '', stock) => {
+    if (!stock) {
+        if (textContent) btn.textContent = textContent;
+        btn.disabled = true;
+        btn.classList.add('no-stock');
+    }
 };
 
 /**
@@ -104,7 +114,7 @@ const addToCart = (cart, id) => {
     if (product && product.stock > 0) {
         product.stock--;
     }
-    console.log(product);
+
     renderAllProducts(products);
     printCart(cart);
 
@@ -139,8 +149,32 @@ const removeFromCart = (id) => {
         cart = cart.filter((item) => item.id !== id);
 
         // Find products in data and restore stock
-        let productInStock = products.find((item) => item.id === id);
-        if (productInStock) productInStock.stock += productToRemove.quantity;
+        let productInProducts = products.find((item) => item.id === id);
+        if (productInProducts) productInProducts.stock += productToRemove.quantity;
+
+        renderAllProducts(products);
+        printCart(cart);
+    }
+};
+
+const updateCartItem = (id, change) => {
+    let productInCart = cart.find((item) => item.id === id);
+    let productInProducts = products.find((item) => item.id === id);
+
+    if (productInCart && productInProducts) {
+        if (change > 0) {
+            if (productInProducts.stock > 0) {
+                productInCart.quantity++;
+                productInProducts.stock--;
+            }
+        } else if (change < 0) {
+            productInCart.quantity--;
+            productInProducts.stock++;
+
+            if (productInCart.quantity <= 0) {
+                cart = cart.filter((item) => item.id !== id);
+            }
+        }
 
         renderAllProducts(products);
         printCart(cart);
@@ -201,13 +235,30 @@ const createCartItem = (item) => {
     const eliminarBtn = createElement('button', '', 'Eliminar', () =>
         removeFromCart(productFound.id)
     );
-    const restBtn = createElement('button', '', '-');
-    const addBtn = createElement('button', '', '+');
+    const restBtn = createElement('button', '', '-', () => updateCartItem(productFound.id, -1));
+    const addBtn = createElement('button', '', '+', () => updateCartItem(productFound.id, 1));
+    checkStock(addBtn, '+', productFound.stock);
 
     btnsContainer.append(eliminarBtn, restBtn, addBtn);
     itemContainer.append(itemDetail, btnsContainer);
 
+    localStorage.setItem('cart', JSON.stringify(cart));
+
     return { itemContainer, total: Number(productFound.price) * Number(item.quantity) };
+};
+
+const loadCart = () => {
+    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    savedCart.forEach((cartItem) => {
+        const product = products.find((item) => item.id === cartItem.id);
+        if (product) {
+            product.stock -= cartItem.quantity;
+        }
+    });
+    cart = savedCart;
+    console.log(cart);
+    renderAllProducts(products);
+    printCart(cart);
 };
 
 const toggleDisplay = (itemName) => {
