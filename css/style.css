@@ -183,6 +183,16 @@ nav {
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
         }
     }
+
+    .no-stock {
+        background-color: var(--text-grey);
+
+        &:hover {
+            cursor: default;
+            background-color: var(--text-grey);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        }
+    }
 }
 
 /* End products Section */

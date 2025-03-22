@@ -39,6 +39,12 @@ const renderProduct = (product) => {
         () => addToCart(cart, product.id),
         product.id
     );
+
+    if (!product.stock) {
+        addToCartBtn.textContent = 'Sin stock';
+        addToCartBtn.disabled = true;
+        addToCartBtn.classList.add('no-stock');
+    }
     /* addToCartBtn.id = product.id;
     addToCartBtn.addEventListener('click', (e) => {
         addToCart(cart, product.id);
@@ -86,13 +92,18 @@ const selectFilter = (e) => {
 };
 
 const addToCart = (cart, id) => {
-    let itemIndex = cart.findIndex((item) => item.id === id);
+    let itemIndexInCart = cart.findIndex((item) => item.id === id);
 
-    if (itemIndex !== -1) {
-        cart[itemIndex].quantity++;
+    if (itemIndexInCart !== -1) {
+        cart[itemIndexInCart].quantity++;
     } else {
         cart.push({ id: id, quantity: 1 });
     }
+
+    let itemIndexInProducts = products.findIndex((item) => item.id === id);
+    products[itemIndexInProducts].stock--;
+    console.log(products[itemIndexInProducts]);
+    renderAllProducts(products);
     printCart(cart);
 
     const cartContainer = document.querySelector('.cart-container');
