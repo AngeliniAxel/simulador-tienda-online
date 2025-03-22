@@ -100,9 +100,11 @@ const addToCart = (cart, id) => {
         cart.push({ id: id, quantity: 1 });
     }
 
-    let itemIndexInProducts = products.findIndex((item) => item.id === id);
-    products[itemIndexInProducts].stock--;
-    console.log(products[itemIndexInProducts]);
+    let product = products.find((item) => item.id === id);
+    if (product && product.stock > 0) {
+        product.stock--;
+    }
+    console.log(product);
     renderAllProducts(products);
     printCart(cart);
 
@@ -129,6 +131,20 @@ const emptyCart = (cart) => {
             printCart(cart);
         }
     });
+};
+
+const removeFromCart = (id) => {
+    let productToRemove = cart.find((item) => item.id === id);
+    if (productToRemove) {
+        cart = cart.filter((item) => item.id !== id);
+
+        // Find products in data and restore stock
+        let productInStock = products.find((item) => item.id === id);
+        if (productInStock) productInStock.stock += productToRemove.quantity;
+
+        renderAllProducts(products);
+        printCart(cart);
+    }
 };
 
 const buyCart = (cart) => {
@@ -182,7 +198,9 @@ const createCartItem = (item) => {
 
     const btnsContainer = createElement('div', 'btns-container');
 
-    const eliminarBtn = createElement('button', '', 'Eliminar');
+    const eliminarBtn = createElement('button', '', 'Eliminar', () =>
+        removeFromCart(productFound.id)
+    );
     const restBtn = createElement('button', '', '-');
     const addBtn = createElement('button', '', '+');
 
