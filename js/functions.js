@@ -123,24 +123,32 @@ const addToCart = (cart, id) => {
 };
 
 const emptyCart = (cart) => {
-    Swal.fire({
-        title: 'Seguro que quieres eliminar todo el carrito?',
-        showDenyButton: true,
-        confirmButtonText: 'Eliminar',
-        confirmButtonColor: '#ff6f61',
-        denyButtonText: `Cancelar`,
-        denyButtonColor: '#666',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire({
-                title: 'Carrito eliminado!',
-                icon: 'success',
-                confirmButtonColor: '#ff6f61',
-            });
-            cart.splice(0, cart.length);
-            printCart(cart);
-        }
-    });
+    if (cart.length) {
+        Swal.fire({
+            title: 'Seguro que quieres eliminar todo el carrito?',
+            showDenyButton: true,
+            confirmButtonText: 'Eliminar',
+            confirmButtonColor: '#ff6f61',
+            denyButtonText: `Cancelar`,
+            denyButtonColor: '#666',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Carrito eliminado!',
+                    icon: 'success',
+                    confirmButtonColor: '#ff6f61',
+                });
+                cart.splice(0, cart.length);
+                printCart(cart);
+            }
+        });
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'El carrito ya está vacio!!',
+            confirmButtonColor: '#ff6f61',
+        });
+    }
 };
 
 const removeFromCart = (id) => {
