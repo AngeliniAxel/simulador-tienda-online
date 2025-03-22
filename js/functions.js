@@ -138,7 +138,7 @@ const emptyCart = (cart) => {
                     icon: 'success',
                     confirmButtonColor: '#ff6f61',
                 });
-                cart.splice(0, cart.length);
+                cart.forEach((product) => removeFromCart(product.id));
                 printCart(cart);
             }
         });
