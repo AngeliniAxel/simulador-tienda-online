@@ -1,13 +1,27 @@
+/**
+ * Loads the cart data from localStorage and updates product stock.
+ *
+ * - Retrieves the cart from localStorage and assigns it to the global `cart` array.
+ * - Adjusts product stock based on the loaded cart data.
+ * - Renders the updated product list and cart state.
+ *
+ * @function loadCart
+ */
 const loadCart = () => {
+    // Get the saved cart from localStorage or initialize an empty array if not found
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Adjust product stock based on the loaded cart
     savedCart.forEach((cartItem) => {
         const product = products.find((item) => item.id === cartItem.id);
         if (product) {
             product.stock -= cartItem.quantity;
         }
     });
+    // Assign the loaded cart to the global cart array
     cart = savedCart;
-    console.log(cart);
+
+    // Render the products and cart to reflect the loaded state
     renderAllProducts(products);
     printCart(cart);
 };
@@ -349,6 +363,9 @@ const emptyCart = (cart) => {
         assign to empty array to update display view 
         */
         cart = [];
+
+        // Removes cart from localStorage
+        localStorage.removeItem('cart');
         printCart(cart);
     } else {
         // Show error alert if cart is already empty
@@ -393,8 +410,8 @@ const buyCart = (cart) => {
         // Clear the cart after purchase
         cart.splice(0, cart.length);
 
-        // Update local storage to reflect empty cart
-        localStorage.setItem('cart', JSON.stringify(cart));
+        // Removes cart from localStorage
+        localStorage.removeItem('cart');
 
         // Update the cart display
         printCart(cart);

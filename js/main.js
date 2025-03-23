@@ -1,4 +1,5 @@
 let cart = [];
+loadCart();
 let brand = 'all';
 
 renderAllProducts(products);
