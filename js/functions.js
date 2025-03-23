@@ -143,10 +143,8 @@ const createAlert = (icon, title, message = '', color) => {
     const alertTitle = document.querySelector('.alert-title');
     alertTitle.textContent = title;
 
-    if (message) {
-        const alertMessage = document.querySelector('.alert-message');
-        alertMessage.textContent = message;
-    }
+    const alertMessage = document.querySelector('.alert-message');
+    alertMessage.textContent = message;
 };
 
 /**
