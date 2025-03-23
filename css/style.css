@@ -20,6 +20,11 @@ button {
     border: none;
 }
 
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .hidden {
     visibility: hidden;
     opacity: 0;
@@ -30,13 +35,15 @@ button {
 
 /* Nav */
 
+header {
+    background-color: var(--red);
+}
 nav {
-    max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--red);
+
     color: var(--text-white);
     padding: 5px;
     margin-bottom: 10px;
@@ -85,6 +92,7 @@ nav {
 .cart-container {
     position: fixed;
     max-width: 350px;
+    margin-top: 0.5em;
     padding: 5px;
     left: 0.5em;
     font-size: 0.8rem;
@@ -162,8 +170,9 @@ nav {
 .products-container {
     display: flex;
     gap: 10px;
-    margin: 0 auto;
+    justify-content: center;
     max-width: 900px;
+    margin: 0 auto;
     flex-wrap: wrap;
 }
 
@@ -235,3 +244,46 @@ nav {
 }
 
 /* End products Section */
+
+/* Footer */
+
+footer {
+    background-color: var(--red);
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+    margin-bottom: 0;
+    padding: 0.5em;
+    font-size: 0.8rem;
+
+    p {
+        color: var(--text-white);
+    }
+}
+
+/* End footer */
+
+/* Media queries */
+
+@media (width >= 601px) {
+    nav {
+        .toggle-menu {
+            display: none;
+        }
+
+        .inputs {
+            visibility: visible;
+            opacity: 1;
+            position: relative;
+            order: 0;
+            width: 350px;
+        }
+    }
+}
+
+@media (width >= 1200px) {
+    .cart-container {
+        right: 50%;
+        transform: translateX(100px);
+    }
+}
