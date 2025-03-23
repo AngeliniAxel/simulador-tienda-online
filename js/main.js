@@ -15,6 +15,9 @@ cartBtn.addEventListener('click', () => toggleDisplay('.cart-container'));
 const closeCartBtn = document.querySelector('.close-cart');
 closeCartBtn.addEventListener('click', () => toggleDisplay('.cart-container'));
 
+const closealertBtn = document.querySelector('.close-alert');
+closealertBtn.addEventListener('click', () => toggleDisplay('.alert'));
+
 const toggleMenu = document.querySelector('.toggle-menu');
 toggleMenu.addEventListener('click', (e) => {
     toggleDisplay('.inputs');
