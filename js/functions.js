@@ -27,6 +27,21 @@ const loadCart = () => {
 };
 
 /**
+ * Updates the cart in localStorage.
+ * This function should be called every time a product is added, removed,
+ * or modified in the cart to keep the data in sync.
+ */
+const updateCartInLocalStorage = () => {
+    // If the cart contains products
+    if (cart.length) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    } else {
+        // If the cart is empty, remove the entry from localStorage
+        localStorage.removeItem('cart');
+    }
+};
+
+/**
  * Toggles the display of an element by adding or removing the 'hidden' class.
  *
  * @param {string} itemName - The CSS selector of the element to toggle.
@@ -128,7 +143,7 @@ const createCartItem = (item) => {
     itemContainer.append(itemDetail, btnsContainer);
 
     // Save the updated cart to localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartInLocalStorage();
 
     return { itemContainer, total: Number(productFound.price) * Number(item.quantity) };
 };
@@ -302,6 +317,9 @@ const removeFromCart = (id) => {
         let productInProducts = products.find((item) => item.id === id);
         if (productInProducts) productInProducts.stock += productToRemove.quantity;
 
+        // Updates local storage
+        updateCartInLocalStorage();
+
         /* 
         Re-rendering the products using selectFilter instead of renderAllProducts
         so if user was using a filter, it stays active
@@ -339,6 +357,9 @@ const updateCartItem = (id, change) => {
             }
         }
 
+        // Updates local storage
+        updateCartInLocalStorage();
+
         /* 
         Re-rendering the products using selectFilter instead of renderAllProducts
         so if user was using a filter, it stays active
@@ -365,7 +386,7 @@ const emptyCart = (cart) => {
         cart = [];
 
         // Removes cart from localStorage
-        localStorage.removeItem('cart');
+        updateCartInLocalStorage();
         printCart(cart);
     } else {
         // Show error alert if cart is already empty
@@ -411,7 +432,7 @@ const buyCart = (cart) => {
         cart.splice(0, cart.length);
 
         // Removes cart from localStorage
-        localStorage.removeItem('cart');
+        updateCartInLocalStorage();
 
         // Update the cart display
         printCart(cart);
