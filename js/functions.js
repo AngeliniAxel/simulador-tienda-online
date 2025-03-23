@@ -126,7 +126,7 @@ const createCartItem = (item) => {
  * @param {string} message - The message to display in the alert.
  * @param {string} color - The CSS class to apply for the alert color (e.g., 'success', 'error').
  */
-const createAlert = (icon, message, color) => {
+const createAlert = (icon, title, message = '', color) => {
     // Remove 'hidden' class from container
     const alert = document.querySelector('.alert');
     alert.classList.remove('hidden');
@@ -139,9 +139,14 @@ const createAlert = (icon, message, color) => {
     alertIcon.className = 'alert-icon';
     alertIcon.classList.add(color);
 
-    // Select the element for the alert message and update its content
-    const alertMessage = document.querySelector('.message');
-    alertMessage.textContent = message;
+    // Select alert title and message and update its content
+    const alertTitle = document.querySelector('.alert-title');
+    alertTitle.textContent = title;
+
+    if (message) {
+        const alertMessage = document.querySelector('.alert-message');
+        alertMessage.textContent = message;
+    }
 };
 
 /**
@@ -332,47 +337,29 @@ const updateCartItem = (id, change) => {
 };
 
 /**
- * Empties the cart after user confirmation using SweetAlert.
+ * Empties the cart or shows an alert if it is already empty
  *
  * @param {Array} cart - The current shopping cart array.
  */
 const emptyCart = (cart) => {
     if (cart.length) {
-        // Asks if user is sure to delete all products in his cart
-        Swal.fire({
-            title: 'Seguro que quieres eliminar todo el carrito?',
-            showDenyButton: true,
-            confirmButtonText: 'Eliminar',
-            confirmButtonColor: '#ff6f61',
-            denyButtonText: `Cancelar`,
-            denyButtonColor: '#666',
-        }).then((result) => {
-            // if emptied, shows confirmation message
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'Carrito eliminado!',
-                    icon: 'success',
-                    confirmButtonColor: '#ff6f61',
-                });
+        // Remove each item from the cart
+        cart.forEach((product) => removeFromCart(product.id));
 
-                // Remove each item from the cart
-                cart.forEach((product) => removeFromCart(product.id));
-
-                /* 
-                After removing each product and restoring array
-                assign to empty array to update display view 
-                */
-                cart = [];
-                printCart(cart);
-            }
-        });
+        /* 
+        After removing each product and restoring array
+        assign to empty array to update display view 
+        */
+        cart = [];
+        printCart(cart);
     } else {
         // Show error alert if cart is already empty
-        Swal.fire({
-            icon: 'error',
-            title: 'El carrito ya está vacio!!',
-            confirmButtonColor: '#ff6f61',
-        });
+        createAlert(
+            '<i class="fa-solid fa-circle-info"></i>',
+            'El carrito ya está vacio!!',
+            '',
+            'info'
+        );
     }
 };
 
@@ -384,16 +371,10 @@ const emptyCart = (cart) => {
 const buyCart = (cart) => {
     if (!cart.length) {
         // Show error if the cart is empty
-        /* Swal.fire({
-            icon: 'error',
-            title: 'El carrito esta vacio!!',
-            text: 'Agrega productos antes de comprar!',
-            confirmButtonColor: '#ff6f61',
-        }); */
-
         createAlert(
             '<i class="fa-solid fa-circle-exclamation"></i>',
             'El carrito esta vacio!!',
+            'Agrega productos antes de comprar!',
             'error'
         );
     } else {
@@ -404,12 +385,12 @@ const buyCart = (cart) => {
         }, 0);
 
         // Show success message with total price
-        Swal.fire({
-            icon: 'success',
-            title: 'Gracias por su compra!!!',
-            text: `Total a pagar: €${total}`,
-            confirmButtonColor: '#ff6f61',
-        });
+        createAlert(
+            '<i class="fa-solid fa-circle-check"></i>',
+            'Gracias por su compra!!!',
+            `Total a pagar: €${total}`,
+            'success'
+        );
 
         // Clear the cart after purchase
         cart.splice(0, cart.length);
