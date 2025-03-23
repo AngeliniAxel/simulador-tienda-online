@@ -120,6 +120,31 @@ const createCartItem = (item) => {
 };
 
 /**
+ * Creates and displays an alert with a custom icon, message, and color.
+ *
+ * @param {string} icon - The HTML string representing the icon to display.
+ * @param {string} message - The message to display in the alert.
+ * @param {string} color - The CSS class to apply for the alert color (e.g., 'success', 'error').
+ */
+const createAlert = (icon, message, color) => {
+    // Remove 'hidden' class from container
+    const alert = document.querySelector('.alert');
+    alert.classList.remove('hidden');
+
+    // Select the element for the alert icon and update its content
+    const alertIcon = document.querySelector('.alert-icon');
+    alertIcon.innerHTML = icon;
+
+    // Reset the icon's class and apply the specified color
+    alertIcon.className = 'alert-icon';
+    alertIcon.classList.add(color);
+
+    // Select the element for the alert message and update its content
+    const alertMessage = document.querySelector('.message');
+    alertMessage.textContent = message;
+};
+
+/**
  * Creates and returns a product card element with product details and "Add to Cart" button.
  *
  * @param {Object} product - The product to render.
@@ -359,12 +384,18 @@ const emptyCart = (cart) => {
 const buyCart = (cart) => {
     if (!cart.length) {
         // Show error if the cart is empty
-        Swal.fire({
+        /* Swal.fire({
             icon: 'error',
             title: 'El carrito esta vacio!!',
             text: 'Agrega productos antes de comprar!',
             confirmButtonColor: '#ff6f61',
-        });
+        }); */
+
+        createAlert(
+            '<i class="fa-solid fa-circle-exclamation"></i>',
+            'El carrito esta vacio!!',
+            'error'
+        );
     } else {
         // Calculate the total price of items in the cart
         const total = cart.reduce((sum, item) => {
