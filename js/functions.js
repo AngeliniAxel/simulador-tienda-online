@@ -23,6 +23,21 @@ const toggleDisplay = (itemName) => {
 };
 
 /**
+ * Changes the icon of the toggle menu button based on the visibility of the `.inputs` element.
+ *
+ * @param {Event} e - The click event triggered on the toggle button.
+ *
+ * - If `.inputs` is visible, changes the icon to a close icon (`fa-xmark`).
+ * - If `.inputs` is hidden, changes the icon to a menu icon (`fa-bars`).
+ */
+const changeToggleMenuIcon = (e) => {
+    const inputs = document.querySelector('.inputs');
+    e.currentTarget.innerHTML = !inputs.classList.contains('hidden')
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+};
+
+/**
  * Creates and returns a new HTML element with optional class, text, event, and ID.
  *
  * @param {string} tag - The HTML tag name (e.g., 'div', 'button', 'p').

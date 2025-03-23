@@ -13,7 +13,10 @@ const cartBtn = document.querySelector('.cart-icon');
 cartBtn.addEventListener('click', () => toggleDisplay('.cart-container'));
 
 const toggleMenu = document.querySelector('.toggle-menu');
-toggleMenu.addEventListener('click', () => toggleDisplay('.inputs'));
+toggleMenu.addEventListener('click', (e) => {
+    toggleDisplay('.inputs');
+    changeToggleMenuIcon(e);
+});
 
 const emptyCartButton = document.querySelector('.empty-btn');
 emptyCartButton.addEventListener('click', () => emptyCart(cart));
