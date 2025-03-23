@@ -12,6 +12,9 @@ inputName.addEventListener('input', selectFilter);
 const cartBtn = document.querySelector('.cart-icon');
 cartBtn.addEventListener('click', () => toggleDisplay('.cart-container'));
 
+const closeCartBtn = document.querySelector('.close-cart');
+closeCartBtn.addEventListener('click', () => toggleDisplay('.cart-container'));
+
 const toggleMenu = document.querySelector('.toggle-menu');
 toggleMenu.addEventListener('click', (e) => {
     toggleDisplay('.inputs');

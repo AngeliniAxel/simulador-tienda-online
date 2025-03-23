@@ -83,10 +83,11 @@ nav {
 /* Cart */
 
 .cart-container {
-    position: absolute;
-    width: 350px;
-    padding: 10px;
-    left: 1em;
+    position: fixed;
+    max-width: 350px;
+    padding: 5px;
+    left: 0.5em;
+    font-size: 0.8rem;
     border: 1px solid var(--red);
     background-color: var(--background-grey);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -96,6 +97,21 @@ nav {
 
     > * {
         margin: 0.2em;
+    }
+
+    .title-container {
+        display: flex;
+        justify-content: space-between;
+
+        .close-cart {
+            color: var(--red);
+            background-color: transparent;
+
+            &:hover {
+                cursor: pointer;
+                color: #df3223;
+            }
+        }
     }
 
     .cart-title {
